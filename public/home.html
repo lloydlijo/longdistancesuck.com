@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Longdistancesuck.com</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header>
+      <h1>Longdistancesuck.com</h1>
+      <button id="menu-btn" class="icon-btn">☰</button>
+    </header>
+
+    <!-- Side Menu -->
+    <div id="side-menu" class="side-menu">
+      <button class="close-btn" id="close-menu">×</button>
+      <button class="menu-item active" data-view="call">📞 Video Call</button>
+      <button class="menu-item" data-view="movie">🎬 Movie</button>
+      <button class="menu-item" data-view="chat">💬 Chat</button>
+    </div>
+
+    <!-- Video Call View -->
+    <div id="call-view" class="view active">
+      <div class="profiles-container">
+        <div class="profile-card">
+          <div class="avatar">L</div>
+          <p class="profile-name">llopie</p>
+          <p class="status" id="status-llopie">Offline</p>
+        </div>
+        <div class="profile-card">
+          <div class="avatar">S</div>
+          <p class="profile-name">sraadu</p>
+          <p class="status" id="status-sraadu">Offline</p>
+        </div>
+      </div>
+
+      <button id="start-call-btn" class="call-btn">Start Call</button>
+
+      <div id="video-container" class="video-container hidden">
+        <video id="remote-video" autoplay playsinline></video>
+        <video id="local-video" autoplay playsinline muted></video>
+        
+        <div class="call-controls">
+          <button id="toggle-mic" class="control-btn">🎤</button>
+          <button id="toggle-camera" class="control-btn">📹</button>
+          <button id="end-call" class="control-btn end">📞</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Movie View -->
+    <div id="movie-view" class="view">
+      <div class="movie-container">
+        <div class="video-section">
+          <input 
+            type="text" 
+            id="video-url-input" 
+            placeholder="Paste video URL (.mp4, .webm)"
+          >
+          <button id="load-video-btn">Load Video</button>
+          <video id="movie-player" controls></video>
+        </div>
+        
+        <div class="movie-call-panel">
+          <video id="movie-remote-video" autoplay playsinline></video>
+          <video id="movie-local-video" autoplay playsinline muted></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat View -->
+    <div id="chat-view" class="view">
+      <div id="messages" class="messages"></div>
+      <div class="chat-input-container">
+        <input 
+          type="text" 
+          id="chat-input" 
+          placeholder="Type a message..."
+          autocomplete="off"
+        >
+        <button id="emoji-btn" class="emoji-btn">😊</button>
+        <button id="send-btn" class="send-btn">Send</button>
+      </div>
+      
+      <div id="emoji-picker" class="emoji-picker hidden">
+        <span class="emoji">😊</span>
+        <span class="emoji">❤️</span>
+        <span class="emoji">😂</span>
+        <span class="emoji">😍</span>
+        <span class="emoji">🥺</span>
+        <span class="emoji">😭</span>
+        <span class="emoji">🔥</span>
+        <span class="emoji">✨</span>
+        <span class="emoji">💕</span>
+        <span class="emoji">🎉</span>
+        <span class="emoji">👍</span>
+        <span class="emoji">🙏</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
