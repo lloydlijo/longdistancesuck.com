@@ -6,37 +6,10 @@ const io = require('socket.io')(http, {
     origin: "*",
     methods: ["GET", "POST"]
   },
-  maxHttpBufferSize: 1e8,
-  pingTimeout: 60000,
-  pingInterval: 25000,
-  transports: ['websocket', 'polling']
-});
-
-// Force HTTPS in production
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
-  next();
-});
-
-// Security headers for mobile compatibility
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  // Permissions for camera and microphone
-  res.setHeader('Permissions-Policy', 'camera=*, microphone=*, display-capture=*');
-  next();
+  maxHttpBufferSize: 1e8
 });
 
 app.use(express.static('public'));
-
-// Serve index.html for root
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
 
 const users = {
   'llopie': { password: '508812', online: false, socketId: null },
@@ -170,5 +143,4 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 3000;
 http.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
