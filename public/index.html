@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Longdistancesuck.com</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Longdistancesuck.com</h1>
+      <p class="subtitle">Enter your password</p>
+      <input 
+        type="password" 
+        id="password-input" 
+        placeholder="Password"
+        inputmode="numeric"
+        autocomplete="off"
+      >
+      <button id="login-btn">Login</button>
+      <p id="error-msg" class="error-msg"></p>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const passwordInput = document.getElementById('password-input');
+    const loginBtn = document.getElementById('login-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    loginBtn.addEventListener('click', login);
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') login();
+    });
+
+    function login() {
+      const password = passwordInput.value.trim();
+      if (password) {
+        socket.emit('login', password);
+      }
+    }
+
+    socket.on('login-success', (data) => {
+      localStorage.setItem('username', data.username);
+      window.location.href = '/home.html';
+    });
+
+    socket.on('login-failed', () => {
+      errorMsg.textContent = 'Invalid password';
+      passwordInput.value = '';
+      passwordInput.focus();
+    });
+  </script>
+</body>
+</html>
