@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Longdistancesuck.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header>
+      <h1 class="site-title">ldr<span>.</span></h1>
+
+      <!-- Status pills — top right -->
+      <div class="status-pills">
+        <div class="status-pill" id="pill-llopie">
+          <span class="status-dot" id="dot-llopie"></span>
+          <span class="pill-name">llopie</span>
+        </div>
+        <div class="status-pill" id="pill-sraadu">
+          <span class="status-dot" id="dot-sraadu"></span>
+          <span class="pill-name">sraadu</span>
+        </div>
+      </div>
+
+      <button id="menu-btn" class="icon-btn">☰</button>
+    </header>
+
+    <!-- Side Menu -->
+    <div id="side-menu" class="side-menu">
+      <button class="close-btn" id="close-menu">×</button>
+      <div class="menu-label">Navigate</div>
+      <button class="menu-item active" data-view="call">
+        <span class="menu-icon">📞</span> Video Call
+      </button>
+      <button class="menu-item" data-view="movie">
+        <span class="menu-icon">🎬</span> Movie Night
+      </button>
+      <button class="menu-item" data-view="chat">
+        <span class="menu-icon">💬</span> Chat
+      </button>
+    </div>
+    <div id="menu-overlay" class="menu-overlay"></div>
+
+    <!-- ── VIDEO CALL VIEW ── -->
+    <div id="call-view" class="view active">
+
+      <!-- Idle state: just the start button -->
+      <div id="call-idle" class="call-idle">
+        <div class="idle-illustration">💞</div>
+        <p class="idle-text">Both online? Start your call.</p>
+        <button id="start-call-btn" class="call-btn" disabled>Start Call</button>
+      </div>
+
+      <!-- Active call: Google Meet layout -->
+      <div id="video-container" class="video-container hidden">
+        <div class="videos-grid">
+          <div class="video-tile">
+            <video id="remote-video" autoplay playsinline></video>
+            <div class="video-label" id="remote-label">them</div>
+          </div>
+          <div class="video-tile local-tile">
+            <video id="local-video" autoplay playsinline muted class="mirrored"></video>
+            <div class="video-label">you</div>
+          </div>
+        </div>
+
+        <div class="call-controls">
+          <button id="toggle-mic" class="control-btn" title="Mute">🎤</button>
+          <button id="toggle-camera" class="control-btn" title="Camera">📹</button>
+          <button id="end-call" class="control-btn end" title="End call">📞</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── MOVIE VIEW ── -->
+    <div id="movie-view" class="view">
+      <div class="movie-container">
+
+        <div class="video-section">
+          <div class="file-upload-area">
+            <label id="movie-file-label" class="file-upload-label" for="movie-file-input">
+              📂 Choose Movie File
+            </label>
+            <input type="file" id="movie-file-input" accept="video/*" style="display:none">
+            <p id="movie-file-status" class="file-status">Each person loads their own copy of the same movie.</p>
+          </div>
+
+          <div class="movie-player-wrapper">
+            <video id="movie-player" controls></video>
+            <div class="movie-custom-controls">
+              <button id="skip-back-btn" class="skip-btn">⏪ 10s</button>
+              <button id="skip-fwd-btn" class="skip-btn">10s ⏩</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side panel video call -->
+        <div class="movie-call-panel">
+          <div class="movie-video-tile">
+            <video id="movie-remote-video" autoplay playsinline></video>
+            <span class="movie-video-label">them</span>
+          </div>
+          <div class="movie-video-tile">
+            <video id="movie-local-video" autoplay playsinline muted class="mirrored"></video>
+            <span class="movie-video-label">you</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CHAT VIEW ── -->
+    <div id="chat-view" class="view">
+      <div id="messages" class="messages"></div>
+      <div class="chat-input-container">
+        <button id="emoji-btn" class="emoji-btn">😊</button>
+        <input type="text" id="chat-input" placeholder="say something sweet..." autocomplete="off">
+        <button id="send-btn" class="send-btn">↑</button>
+      </div>
+      <div id="emoji-picker" class="emoji-picker hidden">
+        <span class="emoji">😊</span><span class="emoji">❤️</span>
+        <span class="emoji">😂</span><span class="emoji">😍</span>
+        <span class="emoji">🥺</span><span class="emoji">😭</span>
+        <span class="emoji">🔥</span><span class="emoji">✨</span>
+        <span class="emoji">💕</span><span class="emoji">🎉</span>
+        <span class="emoji">👍</span><span class="emoji">🙏</span>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
